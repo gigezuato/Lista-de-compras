@@ -1,4 +1,4 @@
-from funcionalidades import *
+from funcionalidades.geral import *
 from funcionalidades.arquivo import *
 
 # Nome do arquivo de texto
@@ -11,7 +11,7 @@ titulo('LISTA DE COMPRAS MAKER', 42, '=-', verde)
 # Enquanto a opção Sair não for escolhida, o loop é executado
 while True:
     titulo('MENU', 42, '-', azul)
-    print('1 - Adicionar itens na lista / 2 - Ver lista / 3 - Sair')
+    print('1 - Adicionar itens na lista / 2 - Ver lista / 3 - Remover item / 4 - Sair')
     # Pede que o usuário digite uma opção até que ela seja válida (número inteiro e dentro das opções disponíveis)
     while True:
         resp = leia_int('Sua escolha: ')
@@ -31,7 +31,11 @@ while True:
                     break
         case 2:  # Ver itens
             ler_arquivo(arq)
-        case 3:  # Sair
+        case 3:  # Remover itens
+            indice_excluir = int(input('Digite o índice do item que deseja excluir: '))
+            excluir_item(arq, indice_excluir)
+        case 4:  # Sair
             break
+
 print('Lista Finalizada!')
 titulo('BOAS COMPRAS!', 42, '=-', verde)
