@@ -1,5 +1,7 @@
 import pandas as pd
 
+from funcionalidades.geral import laranja
+
 
 def arquivo_existe(nome_arquivo):
     """
@@ -24,16 +26,16 @@ def criar_arquivo(nome_arquivo):
     try:
         # Abre e fecha o arquivo no modo de escrita com a codificação UTF-8
         with open(nome_arquivo, 'w', encoding="utf-8") as a:
-            a.write('Índice,Produto,Qtde\n')  # Assim que o arquivo é criado, escreve nele os títulos
+            a.write('Produto,Qtde\n')  # Assim que o arquivo é criado, escreve nele os títulos
         print(f'Arquivo {nome_arquivo} criado com sucesso!')
 
     except Exception as e:
         print(f'Erro na criação do arquivo: {e}')
 
 
-def ler_arquivo(nome_arquivo):
+def mostrar_tabela(nome_arquivo):
     """
-        -> Fará a leitura do arquivo e mostra uma tabela simples com os dados.
+        -> Faz a leitura do arquivo e mostra uma tabela simples com os dados.
     :param nome_arquivo: nome do arquivo que será lido.
     """
     try:
@@ -46,7 +48,8 @@ def ler_arquivo(nome_arquivo):
             return
 
         # Gerar uma tabela simples com o  conteúdo do arquivo
-        tabela = pd.read_csv(nome_arquivo, delimiter=',', encoding="utf-8", index_col=0)
+        tabela = pd.read_csv(nome_arquivo, delimiter=',', encoding="utf-8")
+        tabela.index = tabela.index + 1  # Os índices começam a partir de 1
         print(tabela)
 
     # Possíveis erros
@@ -67,19 +70,13 @@ def adicionar_itens(nome_arquivo, item, qtde):
     """
     try:
         # Abre e fecha o arquivo no modo de leitura com codificação UTF-8
-        with open(nome_arquivo, 'r', encoding='utf-8') as a:
-            linhas = a.readlines()
-
-        if len(linhas) > 1:  # Se tiver mais linhas além da linha dos títulos
-            ultimo_indice = int(linhas[-1].split(',')[0])  # Transforma em inteiro o índice da última linha da lista
-        else:  # Se só tiver as linhas dos títulos
-            ultimo_indice = 0  # O índice anterior será 0
-        novo_indice = ultimo_indice + 1  # o novo índice será o anterior + 1
+        '''with open(nome_arquivo, 'r', encoding='utf-8') as a:
+            linhas = a.readlines()'''
 
         # Abre e fecha o arquivo no modo append (adicionar) com codificação UTF-8
         with open(nome_arquivo, 'a', encoding='utf-8') as a:
-            a.write(f'{novo_indice},{item},{qtde}\n')  # Escreve no arquivo o índice, o item e a quantidade
-            print(f'Item "{item}" adicionado com sucesso!')
+            a.write(f'{item},{qtde}\n')  # Escreve no arquivo o item e a quantidade
+            print(f'\033[{laranja}mItem "{item}" adicionado com sucesso!\033[m')
 
     except Exception as e:
         print(f'Erro ao adicionar item: {e}')
@@ -98,5 +95,8 @@ def excluir_item(nome_arquivo, indice):
     # Remove a linha do índice passado pelo usuário
     del linhas[indice]
 
-    # Precisa reescrever as linhas com os índices atualizados
-
+    # Reescreve as linhas e mostra a tabela atualizada
+    with open(nome_arquivo, 'w', encoding='utf-8') as a:
+        a.writelines(linhas)
+    print(f'\033[{laranja}mItem removido com sucesso!\033[m')
+    mostrar_tabela(nome_arquivo)
