@@ -83,6 +83,11 @@ def adicionar_itens(nome_arquivo, item, qtde):
 
 
 def excluir_item(nome_arquivo, indice):
+    """
+        -> Exclui do arquivo txt o item do índice informado pelo usuário.
+    :param nome_arquivo: nome do arquivo que contém a lista
+    :param indice: índice do item que será excluído
+    """
     # Lê todas as linhas do arquivo
     with open(nome_arquivo, 'r', encoding='utf-8') as a:
         linhas = a.readlines()
