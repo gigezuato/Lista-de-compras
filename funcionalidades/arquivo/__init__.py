@@ -1,6 +1,6 @@
 import pandas as pd
 
-from funcionalidades.geral import laranja
+from funcionalidades.geral import laranja, vermelho
 
 
 def arquivo_existe(nome_arquivo):
@@ -94,7 +94,7 @@ def excluir_item(nome_arquivo, indice):
 
     # Verifica se o número da linha é válido
     if indice < 1 or indice > len(linhas):
-        print("Número da linha inválido.")
+        print(f'\033[{vermelho}mEsse índice não existe!\033[m')
         return
 
     # Remove a linha do índice passado pelo usuário

@@ -18,7 +18,7 @@ while True:
         if resp in range(0, 5):
             break
         else:
-            print('\033[0;31mDigite uma opção válida! [1, 2 ou 3]\033[m')
+            print('\033[0;31mDigite uma opção válida! [1, 2, 3 ou 4]\033[m')
     # Cada opção é um case diferente
     match resp:
         case 1:  # Adicionar itens
@@ -26,7 +26,11 @@ while True:
                 item = str(input('>> Item: ')).strip()
                 quant = leia_int('>> Quantidade:')
                 adicionar_itens(arq, item, quant)
-                continua = str(input('>> Deseja adicionar mais itens? [S/N]: ')).upper().strip()[0]
+                while True:
+                    continua = str(input('>> Deseja adicionar mais itens? [S/N]: ')).upper().strip()[0]
+                    if continua in 'SN':
+                        break
+                    print(f'\033[{vermelho}mDigite S - sim ou N - não!\033[m')
                 if continua == 'N':
                     break
         case 2:  # Ver itens
