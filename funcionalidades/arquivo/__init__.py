@@ -69,10 +69,6 @@ def adicionar_itens(nome_arquivo, item, qtde):
     :param qtde: quantidade do item
     """
     try:
-        # Abre e fecha o arquivo no modo de leitura com codificação UTF-8
-        '''with open(nome_arquivo, 'r', encoding='utf-8') as a:
-            linhas = a.readlines()'''
-
         # Abre e fecha o arquivo no modo append (adicionar) com codificação UTF-8
         with open(nome_arquivo, 'a', encoding='utf-8') as a:
             a.write(f'{item},{qtde}\n')  # Escreve no arquivo o item e a quantidade
@@ -93,7 +89,7 @@ def excluir_item(nome_arquivo, indice):
         linhas = a.readlines()
 
     # Verifica se o número da linha é válido
-    if indice < 1 or indice > len(linhas):
+    if indice < 1 or indice > len(linhas) - 1:
         print(f'\033[{vermelho}mEsse índice não existe!\033[m')
         return
 
