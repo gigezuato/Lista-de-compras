@@ -1,10 +1,10 @@
 # 🛒Lista-de-compras
 ### Projeto de uma Lista de compras de materiais escolares
  ***
- - Assim que inicia-se o programa, é verificado se o arquivo *txt* contendo a lista já existe. Se não existir, o arquivo é criado. Se existir, o programa segue normalmente.
+ - Assim que inicia-se o programa, é verificado se o arquivo *.txt* contendo a lista já existe. Se não existir, o arquivo é criado. Se existir, o programa segue normalmente.
  
  - O projeto possui um menu que dispõe das opções:
-1. **Adicionar itens na lista** (o usuário informa o nome do produto e a quantidade, assim as informações são inseridas no arquivo txt)
+1. **Adicionar itens na lista** (o usuário informa o nome do produto e a quantidade, assim as informações são inseridas no arquivo .txt)
 2. **Ver a lista** (exibe uma tabela contendo os índices de cada produto, os nomes dos produtos e a quantidade de cada um)
 3. **Remover item** (remove o item a partir do índice informado pelo usuário)
 4. **Sair** (o programa é encerrado).
