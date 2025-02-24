@@ -12,3 +12,5 @@
 🛠️ A linguagem usada foi Python, aplicando conceitos como: while, match/case, if/else, with. Além disso, foram utilizadas funções, para deixar o código mais prático, que estão dentro do Pacote Funcionalidades. O tratamento de erros foi realizado, com os conceitos de try/except/else.
 
 🐼 A biblioteca Pandas foi importada no projeto para exibir uma tabela simples com os índices, produtos e quantidades de produtos da lista, sempre atualizada pelo usuário.
+
+📌 Atualizações: trabalhando em carregar o arquivo em csv e salvar para ser aberto no Excel.
