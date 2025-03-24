@@ -1,11 +1,14 @@
 from funcionalidades.geral import *
 from funcionalidades.arquivo import *
+from os.path import exists
 
 # Nome do arquivo de texto
-arq = 'lista.txt'
+arq = 'lista.csv'
 
-if not arquivo_existe(arq):  # Se o arquivo não existir, ele é criado
+if not exists(arq):  # Se o arquivo não existir, ele é criado
     criar_arquivo(arq)
+else:
+    print('Arquivo já existe! Prosseguindo com o programa...')
 
 titulo('LISTA DE MATERIAIS ESCOLARES', 42, '=-', verde)
 # Enquanto a opção Sair não for escolhida, o loop é executado
