@@ -13,4 +13,4 @@
 
 🐼 A biblioteca Pandas foi importada no projeto para exibir uma tabela simples com os índices, produtos e quantidades de produtos da lista, sempre atualizada pelo usuário.
 
-📌 Atualizações: trabalhando em carregar o arquivo em csv e salvar para ser aberto no Excel.
+📌 Atualizações: trabalhando na adaptação da lista em formato CSV, também em disponibilizar a opção de salvar o arquivo em Excel e na melhoria da visualização da tabela.
