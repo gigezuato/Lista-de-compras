@@ -1,6 +1,5 @@
 import csv
-import pandas as pd
-
+from tabulate import tabulate
 from funcionalidades.geral import laranja, vermelho
 
 
@@ -13,7 +12,7 @@ def criar_arquivo(nome_arquivo):
         # Abre e fecha o arquivo no modo de escrita com a codificação UTF-8
         with open(nome_arquivo, 'w', newline='', encoding="utf-8") as a:
             escritor = csv.writer(a)
-            escritor.writerow(['Índice', 'Produto', 'Qtde'])  # Escreve os cabeçalhos
+            escritor.writerow(['Índice', 'Produto', 'Quantidade'])  # Escreve os cabeçalhos
         print(f'Arquivo {nome_arquivo} criado com sucesso!')
     except Exception as e:
         print(f'Erro na criação do arquivo: {e}')
@@ -27,15 +26,14 @@ def mostrar_tabela(nome_arquivo):
     try:
         # Abre e fecha o arquivo em modo de leitura com codificação UTF-8
         with open(nome_arquivo, 'r', newline='', encoding='utf-8') as a:
-            linhas = a.readlines()  # Lê cada linha do arquivo retornando uma lista de strings
+            leitor = csv.reader(a, delimiter=',')
+            lista = list(leitor)
 
-        if len(linhas) <= 1:  # Se o arquivo não tiver linhas ou somente a linha com os títulos
+        if len(lista) <= 1:  # Se o arquivo não tiver linhas ou somente a linha com os títulos
             print('A lista de compras está vazia.')
             return
 
-        # Gerar uma tabela simples com o  conteúdo do arquivo
-        tabela = pd.read_csv(nome_arquivo, delimiter=',', index_col=0,  encoding="utf-8")
-        print(tabela)
+        print(tabulate(lista, headers="firstrow", tablefmt="fancy_grid", showindex=range(1, len(lista))))
 
     # Possíveis erros
     except FileNotFoundError:
@@ -49,17 +47,17 @@ def mostrar_tabela(nome_arquivo):
 def adicionar_itens(nome_arquivo, item, qtde):
     """
         -> Adiciona o índice gerado automaticamente, o item e a quantidade, digitados pelo usuário, na lista.
-    :param nome_arquivo: nome do arquivo onde será adicionado.
-    :param item: item que será adicionado
-    :param qtde: quantidade do item
+    :param nome_arquivo: Nome do arquivo CSV
+    :param item: Nome do produto a ser adicionado
+    :param qtde: Quantidade do produto a ser adicionado
+    :return:
     """
     # Adicionando o novo item
     try:
-        # Abre e fecha o arquivo no modo append (adicionar) com codificação UTF-8
-        with open(nome_arquivo, 'a', newline='', encoding='utf-8') as a:
-            escritor = csv.writer(a)  # Escrever no arquivo
+        # Adiciona item com índice
+        with open(nome_arquivo, "a", newline="", encoding="utf-8") as a:
+            escritor = csv.writer(a, delimiter=',')
             escritor.writerow([item, qtde])
-
             print(f'\033[{laranja}mItem "{item}" adicionado com sucesso!\033[m')
     except Exception as e:
         print(f'Erro ao adicionar item: {e}')
@@ -72,8 +70,12 @@ def excluir_item(nome_arquivo, indice):
     :param indice: índice do item que será excluído
     """
     # Lê todas as linhas do arquivo
-    with open(nome_arquivo, 'r', encoding='utf-8') as a:
-        linhas = a.readlines()
+    try:
+        with open(nome_arquivo, 'r', encoding='utf-8') as a:
+            leitor = csv.reader(a, delimiter=',')
+            linhas = list(leitor)
+    except Exception as e:
+        print(f'Erro ao ler o aquivo: {e}')
 
     # Verifica se o número da linha é válido
     if indice < 1 or indice > len(linhas) - 1:
@@ -84,7 +86,13 @@ def excluir_item(nome_arquivo, indice):
     del linhas[indice]
 
     # Reescreve as linhas e mostra a tabela atualizada
-    with open(nome_arquivo, 'w', encoding='utf-8') as a:
-        a.writelines(linhas)
+    try:
+        with open(nome_arquivo, "w", newline="", encoding="utf-8") as a:
+            escritor = csv.writer(a, delimiter=',')
+            for i in range(len(linhas)):
+                escritor.writerow(linhas[i])
+    except Exception as e:
+        print(f'Erro ao reescrever o arquivo: {e}')
+
     print(f'\033[{laranja}mItem removido com sucesso!\033[m')
     mostrar_tabela(nome_arquivo)
