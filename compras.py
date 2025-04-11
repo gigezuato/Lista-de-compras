@@ -4,6 +4,7 @@ from os.path import exists
 
 # Nome do arquivo de texto
 arq = 'lista.csv'
+nome = 'lista'
 
 if not exists(arq):  # Se o arquivo não existir, ele é criado
     criar_arquivo(arq)
@@ -14,11 +15,12 @@ titulo('LISTA DE MATERIAIS ESCOLARES', 42, '=-', verde)
 # Enquanto a opção Sair não for escolhida, o loop é executado
 while True:
     titulo('MENU', 42, '-', azul)
-    print(f'\033[{laranja}m1 - Adicionar itens na lista / 2 - Ver lista / 3 - Remover item / 4 - Sair\033[m')
+    print(f'\033[{laranja}m1 - Adicionar itens na lista / 2 - Ver lista / 3 - Remover item / 4 - Salvar lista / '
+          f'5 - Sair\033[m')
     # Pede que o usuário digite uma opção até que ela seja válida (número inteiro e dentro das opções disponíveis)
     while True:
         resp = leia_int('>> Sua escolha: ')
-        if resp in range(0, 5):
+        if resp in range(0, 6):
             break
         else:
             print('\033[0;31mDigite uma opção válida! [1, 2, 3 ou 4]\033[m')
@@ -41,7 +43,9 @@ while True:
         case 3:  # Remover itens
             indice_excluir = int(input('>> Digite o índice do item que deseja excluir: '))
             excluir_item(arq, indice_excluir)
-        case 4:  # Sair
+        case 4: # Salvar o arquivo para excel
+            salvar(nome)
+        case 5:  # Sair
             break
 
 print(f'\033[{laranja}mLista Finalizada!\033[m')
