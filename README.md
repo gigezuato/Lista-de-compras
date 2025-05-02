@@ -1,6 +1,6 @@
 # 🛒Lista-de-compras
-### 📚Projeto de uma Lista de compras de materiais escolares
- ***
+📚Projeto de uma Lista de compras de materiais escolares
+---
  - Assim que inicia-se o programa, é verificado se o arquivo *.txt*, contendo a lista, já existe. Se não existir, o arquivo é criado. Se existir, o programa segue normalmente.
  
  - O projeto possui um menu que dispõe das opções:
@@ -13,4 +13,9 @@
 
 🐼 A biblioteca Pandas foi importada no projeto para exibir uma tabela simples com os índices, produtos e quantidades de produtos da lista, sempre atualizada pelo usuário.
 
-📌 Atualizações: trabalhando em carregar o arquivo em csv e salvar para ser aberto no Excel.
+📌 Atualizações
+---
+Agora, o projeto possui uma branch chamada *"csv-version"*. Nela ocorrem as seguintes mudanças:
+- O arquivo é criado diretamente em formato *csv*
+- Usa-se a biblioteca **csv** com funcionalidades como *csv.reader* e *csv.writer* para manipular o arquivo
+- A biblioteca **pandas** foi utilizada para criar um dataframe do arquivo csv com *pd.read_csv* e transformar esse arquivo csv em *.xlsx*, ou seja, salvar em formato compatível com Excel usando *to_excel*
